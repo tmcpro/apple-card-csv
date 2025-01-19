@@ -18,9 +18,91 @@ limitations under the License.
 
 -->
 
-# Apple Card Statement
+# Apple Card Statement Parser
 
-> Parses an Apple Card statement.
+> Parses Apple Card statements and converts them to CSV format.
+
+## Overview
+
+For older Apple devices supporting Apple Wallet (e.g., iPhone 6, iPhone 5, etc) but no longer supporting OS updates (iOS < 13), users are unable to export their Apple Card statements as CSV. This tool helps by reading and parsing exported statement PDFs for CSV generation.
+
+## Prerequisites
+
+- Node.js >= 18.0.0
+
+## Installation
+
+```bash
+# Install globally
+npm install -g apple-card-csv
+
+# Or run directly with npx
+npx apple-card-csv
+```
+
+## Usage
+
+### Command Line
+
+```bash
+# Process a single statement
+apple-card-csv statement.pdf > output.csv
+
+# Process multiple statements
+apple-card-csv statement1.pdf statement2.pdf > combined.csv
+
+# Process from stdin
+cat statement.pdf | apple-card-csv > output.csv
+
+# Enable debug output
+DEBUG=apple-card-csv* apple-card-csv statement.pdf
+```
+
+### Programmatic Usage
+
+```javascript
+import { readFile } from 'node:fs/promises';
+import { parse } from 'apple-card-csv';
+
+try {
+    const pdfData = await readFile('statement.pdf');
+    const transactions = await parse(new Uint8Array(pdfData));
+    console.log(transactions);
+} catch (error) {
+    console.error('Error:', error.message);
+}
+```
+
+## Output Format
+
+The CSV output includes the following columns:
+
+- **Date**: Transaction date (MM/DD/YYYY)
+- **Type**: Transaction type (e.g., 'Transactions', 'Payments', 'Interest Charged')
+- **Description**: Transaction description
+- **Daily Cash (%)**: Daily cash percentage
+- **Daily Cash ($)**: Daily cash amount
+- **Amount**: Transaction amount
+
+## Development
+
+```bash
+# Install dependencies
+npm install
+
+# Run tests
+npm test
+
+# Lint code
+npm run lint
+
+# Format code
+npm run format
+```
+
+## License
+
+Apache-2.0 © Athan Reines
 
 <!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
 
