@@ -7,6 +7,12 @@
     "name": "Athan Reines",
     "url": "https://github.com/kgryte"
   },
+  "contributors": [
+    {
+      "name": "Tyler McIntyre",
+      "url": "https://github.com/tmcpro"
+    }
+  ],
   "type": "module",
   "bin": {
     "apple-card-csv": "./bin/cli.js"
@@ -38,13 +44,13 @@
     "prepare": "npm run lint && npm run format:check",
     "prepublishOnly": "npm test"
   },
-  "homepage": "https://github.com/kgryte/apple-card-csv",
+  "homepage": "https://github.com/tmcpro/apple-card-csv",
   "repository": {
     "type": "git",
-    "url": "git://github.com/kgryte/apple-card-csv.git"
+    "url": "git://github.com/tmcpro/apple-card-csv.git"
   },
   "bugs": {
-    "url": "https://github.com/kgryte/apple-card-csv/issues"
+    "url": "https://github.com/tmcpro/apple-card-csv/issues"
   },
   "dependencies": {
     "commander": "^12.0.0",
